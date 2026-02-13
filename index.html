@@ -340,9 +340,10 @@
             align-items: center; justify-content: center; margin: 0 auto 20px;
         }
         .success-icon svg { width: 28px; height: 28px; color: var(--success); }
-        .success-view h2 { font-family: 'Geist Mono', monospace; font-size: 24px; font-weight: 400; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
-        .success-view p { color: var(--text-secondary); font-size: 14px; margin-bottom: 8px; }
+        .success-view h2 { font-family: 'Geist Mono', monospace; font-size: 24px; font-weight: 400; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0; }
+        .success-view p { color: var(--text-secondary); font-size: 14px; margin-bottom: 8px; line-height: 1.5; }
         .success-view p:last-of-type { margin-bottom: 28px; }
+        .success-view a.btn { text-decoration: none; }
 
         .conditional { display: none; margin-top: 12px; padding-left: 28px; }
         .conditional.visible { display: block; animation: fadeIn 0.3s ease-out; }
