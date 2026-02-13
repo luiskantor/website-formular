@@ -361,10 +361,11 @@
         @media (max-width: 860px) {
             .layout { flex-direction: column; height: auto; overflow: auto; }
             html, body { overflow: auto; height: auto; }
-            .panel-left { width: 100%; border-right: none; border-bottom: 1px solid var(--divider); padding: 32px 24px 24px; justify-content: flex-start; }
+            .panel-left { width: 100%; border-right: none; border-bottom: 1px solid var(--divider); padding: 32px 24px 0; justify-content: flex-start; }
+            .header p { padding-bottom: 16px; }
             .panel-right { width: 100%; height: auto; overflow: visible; }
             .panel-right-content { padding: 32px 24px 48px; }
-            .progress-container { padding: 16px 24px 12px; }
+            .progress-container { padding: 16px 24px 16px; }
             .footer-wrapper { position: static; width: 100%; padding: 24px 24px; border-top: 1px solid var(--divider); }
             .header-logo { width: 120px; height: auto; margin-bottom: 20px; }
             .form-row, .option-grid { grid-template-columns: 1fr; }
@@ -455,7 +456,7 @@
                 <div class="step active" data-step="1">
                     <div class="step-header">
                         <div class="step-header-label"><span>01</span><span>Über dich & dein Unternehmen</span></div>
-                        <div class="step-description">Grundlegende Informationen zum Ansprechpartner und Unternehmen.</div>
+                        <div class="step-description">Grundlegende Informationen zu dir und dem Unternehmen.</div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
