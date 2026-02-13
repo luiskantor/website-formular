@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website-Projekt – Fragebogen</title>
+    <title>kantor lab · Fragebogen für Website</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/geist@1.2.0/dist/fonts/geist-sans/style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/geist@1.2.0/dist/fonts/geist-mono/style.css" rel="stylesheet">
@@ -304,9 +304,8 @@
         /* Summary */
         .summary-section { margin-bottom: 20px; }
         .summary-section-title {
-            font-family: 'Geist Sans', sans-serif; font-size: 14px; font-weight: 600;
-            color: var(--text); margin-bottom: 10px; padding-bottom: 6px;
-            border-bottom: 1px solid var(--border);
+            display: block; font-size: 14px; font-weight: 600;
+            color: var(--text); margin-bottom: 10px;
         }
         .summary-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 6px 0; gap: 20px; }
         .summary-label { font-size: 12px; color: var(--text-muted); flex-shrink: 0; min-width: 120px; }
@@ -360,9 +359,9 @@
             </div>
             <div class="footer-wrapper">
                 <div class="footer">
-                    <a href="https://DEINE-DOMAIN.de/impressum" target="_blank">Impressum</a>
+                    <a href="https://www.kantorlab.de/legal/impressum" target="_blank">Impressum</a>
                     <span class="footer-sep">·</span>
-                    <a href="https://DEINE-DOMAIN.de/datenschutz" target="_blank">Datenschutz</a>
+                    <a href="https://www.kantorlab.de/legal/datenschutz" target="_blank">Datenschutz</a>
                 </div>
             </div>
         </div>
@@ -733,7 +732,7 @@
 
         async function submitForm() {
             const data = collectAllData();
-            const WEBHOOK_URL = 'https://DEINE-N8N-INSTANZ.de/webhook/fragebogen';
+            const WEBHOOK_URL = 'https://workflow.kantorlab.de/webhook/c48631c4-e3f0-4196-a9fb-da399560ccca';
             const submitBtn = document.querySelector('.step.active .btn-primary');
             const originalText = submitBtn.innerHTML;
             submitBtn.innerHTML = 'Wird gesendet …';
