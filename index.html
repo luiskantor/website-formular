@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>kantor lab · Fragebogen für Website</title>
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFjklEQVR4nO1WX4icVxX/nXPvNztJE5JAUvNQXXez3ZhNstvNzOzONH9G1NaVNkgehuCDKCq2IILG9qUtfIwvokJBDIggCLUWYRA1Wt2SghlqW5l2ySZpRtwkDcJKyLRQt1pndr57zvEhs+t0OruJhYIP+cEHH+dee87v/s49517gf0AcxwyAstn8pwqFw49MTR16rFAo3NkZJgBcKpVc5/+DQy53sJ7NHnozk5k+2RW8NygDMd/M100n9KJUKjkC/UtVWsz+w7ncvV/sDFkud+9XJienTxaLRQ9AgbLejMQtEejIinz+UHFx8frfiPnpduudH0siiKKBF1bmEfGyj/xDrZYt5POHH83lDu4FytpJ3fsnUKlUNI5jVnVXQgiLzrsfbNy05dMu8rP33Xfk6so8VbrC5BogGwLoe8zut9PT0+Pl8tokbumwxHHM5XLZCoUjWVU7JSrbvfc+BGm++sqLGzsbsVzu0HejlH+03W63nXMp5zySdvJ2COH42bN/fq7jzm5JgWKx6Du5pHq9TqVSiQHbzI53AiARCY65lc8fPLbimAj/UDVjZq+iPwvJckxE15jpcG/gdQnEcczVajVUq9UAwBqNBlUqFQlBHlFVEBEBMOfdthDsAQCayeSnADwkEhIiBhGqtdpL33YuHJmbe/nxfrsH1knB5GThS97zYJK8c3J+fv6NyWz+aOT8LwCkzYzMzJxzgKHWbiefNwsf3bR5y+kkaYPZQUL4Sa32p692gtJaCryLQBzHfObMmdTysj6hag+b6RMAXwLb12H4JBFvMlPrWpdEUSoKSeuYSPvZKNow1W63JZWKdojov1WRffDB+79fLpcBQNdNQalUcuVyWZtNKzgfPS4iJ4l4yXn/Oyb+LBF6g8PMWCSoGR8BBj4igm3ODWxRxcejKD3LTJ+p1+s0MzMTrdUh/Xs5WSQhsbfeuv7z7dt3HiOmdGjLMhGleh0QEXfS8TnVcDY1sPEpwKAKiIqZ4VylUhEA0m/3fQkQkQGgdDp9hxkCzAxAX/ZmJt57D8MJsNugKqKqAUAE0BIzv5rPHzwKAMrMCMt/7FWq72NrjPxngIkIjOzICKLrNefJiEbAPwVoECggJ5DZGYhilJO1X4ZAi165q1mKp15CsCec2gnyXyrJCi8oqoGAABQ/qefVwKVSkUBQIQuhiQ8dvny5WVVTRMRAUgBxKqmqhoqMwuqvs6JRH8A8DWY/MHMmoApmxlMtGREQPfnTiSJXWzd+O86A4YBtdqLVwF8BwC1Wv98RlUmiGnIVDcT8z5mxySIiIYkofn5V14cG5+sUrN1LZUauJ+ZSUT/aSt5em7u5TkAOHBg+kfKjgXi0EOhTxWAisWiq1arMjc3Nz+2/55fsbml1+bO/G7//tlvMMsdqnKX8/5hVf3pzMzMwOzs7GUA3+p1NDY2lqrX60mSJM8QhYkEqWsd1fs2pVWsXJ/NnvHj4xNZu/fee57sHh8cnNg6Pn7gE10rVqtkYmJiayaT2T4yMjKwYstkMlv27dv3oZUNdvvqpwAajQYBgIhmtNn8+18XL57IZDLRwMAAnzt78UnicPT8+XMFXKMSXC3wTtsJfZod5XdKH0fz2VKp5CqVyhKAJazTkntBAPh8dHTow7uGdl/YNTTylRu2kl279+7ZNTz6jZGR0S93q7WC4aHdb4yMfOz54eHxO7q6H2GNi2+t69gA0MLCwtUgckVU8jdsDTp/6dLfVOT3IciBjszd5CEa5pMk+cPrr59vdJS0ztf3LrgZeHBwcOvOnSM7upUBgB07xjZlMpmoZxsH3HhHvJ+At0zsX+69F3yf3FhDdwK7ABXPBNM+e3kbtwkAkmNyAwWiG5mKr/eMdwOlrKm+J/6v+A/CCsSqsGeMFwAAAABJRU5ErkJggg==">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/geist@1.2.0/dist/fonts/geist-sans/style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/geist@1.2.0/dist/fonts/geist-mono/style.css" rel="stylesheet">
@@ -304,6 +305,17 @@
         /* Logo light/dark mode */
         .logo-dark { display: none; }
 
+        /* Theme toggle */
+        .theme-toggle {
+            background: none; border: 1.5px solid var(--border); border-radius: 6px;
+            cursor: pointer; padding: 4px 6px; display: flex; align-items: center; justify-content: center;
+            color: var(--text-muted); transition: all 0.2s; margin-left: auto;
+        }
+        .theme-toggle:hover { border-color: var(--text-muted); color: var(--text); }
+        .theme-toggle svg { width: 14px; height: 14px; }
+        .theme-toggle .icon-moon { display: block; }
+        .theme-toggle .icon-sun { display: none; }
+
         /* Summary */
         .summary-section { margin-bottom: 20px; }
         .summary-section + .summary-section { border-top: 1px solid var(--border); padding-top: 16px; }
@@ -348,33 +360,37 @@
         }
 
         /* ===== DARK MODE ===== */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #111111;
-                --surface: #1A1A1A;
-                --border: #2E2E2E;
-                --border-focus: #FFFFFF;
-                --text: #EEEEEE;
-                --text-secondary: #AAAAAA;
-                --text-muted: #777777;
-                --accent: #FFFFFF;
-                --accent-light: #1E1E1E;
-                --success: #4CAF50;
-                --success-bg: #1B3A25;
-                --divider: rgba(255, 255, 255, 0.1);
-            }
-
-            .form-input, .form-textarea, .form-select { background: #1E1E1E; }
-            .form-input:focus, .form-textarea:focus, .form-select:focus { box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08); }
-            .option-item label { background: #1E1E1E; }
-            .btn-primary { background: #FFFFFF; color: #111111; }
-            .btn-primary:hover { background: #E0E0E0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
-            .panel-right::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); }
-            .panel-right::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
-
-            .logo-light { display: none; }
-            .logo-dark { display: block; }
+        [data-theme="dark"] {
+            --bg: #111111;
+            --surface: #1A1A1A;
+            --border: #2E2E2E;
+            --border-focus: #FFFFFF;
+            --text: #EEEEEE;
+            --text-secondary: #AAAAAA;
+            --text-muted: #777777;
+            --accent: #FFFFFF;
+            --accent-light: #1E1E1E;
+            --success: #4CAF50;
+            --success-bg: #1B3A25;
+            --divider: rgba(255, 255, 255, 0.1);
         }
+
+        [data-theme="dark"] .form-input,
+        [data-theme="dark"] .form-textarea,
+        [data-theme="dark"] .form-select { background: #1E1E1E; }
+        [data-theme="dark"] .form-input:focus,
+        [data-theme="dark"] .form-textarea:focus,
+        [data-theme="dark"] .form-select:focus { box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08); }
+        [data-theme="dark"] .option-item label { background: #1E1E1E; }
+        [data-theme="dark"] .btn-primary { background: #FFFFFF; color: #111111; }
+        [data-theme="dark"] .btn-primary:hover { background: #E0E0E0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
+        [data-theme="dark"] .panel-right::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); }
+        [data-theme="dark"] .panel-right::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
+
+        [data-theme="dark"] .logo-light { display: none; }
+        [data-theme="dark"] .logo-dark { display: block; }
+        [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+        [data-theme="dark"] .theme-toggle .icon-sun { display: block; }
     </style>
 </head>
 <body>
@@ -396,6 +412,10 @@
                     <a href="https://www.kantorlab.de/legal/impressum" target="_blank">Impressum</a>
                     <span class="footer-sep">·</span>
                     <a href="https://www.kantorlab.de/legal/datenschutz" target="_blank">Datenschutz</a>
+                    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Farbmodus wechseln">
+                        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    </button>
                 </div>
             </div>
         </div>
@@ -671,6 +691,18 @@
     </div>
 
     <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        }
+
+        (function() {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        })();
+
         let currentStep = 1;
         const totalSteps = 6;
         const stepLabels = ['Über dich', 'Aktuelle Situation', 'Ziele & Zielgruppe', 'Umfang & Inhalte', 'Inhalte & Budget', 'Zusammenfassung'];
