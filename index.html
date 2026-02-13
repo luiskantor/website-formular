@@ -345,6 +345,12 @@
         .success-view p:last-of-type { margin-bottom: 28px; }
         .success-view a.btn { text-decoration: none; }
 
+        .form-input.error, .form-textarea.error, .form-select.error { border-color: #D32F2F; }
+        .form-input.error:focus, .form-textarea.error:focus, .form-select.error:focus { border-color: #D32F2F; box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1); }
+        .option-grid.error .option-item label { border-color: #D32F2F; }
+        .form-error { font-size: 12px; color: #D32F2F; margin-top: 4px; display: none; }
+        .form-error.visible { display: block; }
+
         .conditional { display: none; margin-top: 12px; padding-left: 28px; }
         .conditional.visible { display: block; animation: fadeIn 0.3s ease-out; }
 
@@ -749,8 +755,96 @@
             updateProgress();
         }
 
+        let formTouched = false;
+
+        window.addEventListener('beforeunload', function(e) {
+            if (formTouched) { e.preventDefault(); e.returnValue = ''; }
+        });
+
+        const stepValidation = {
+            1: [
+                { type: 'input', id: 'name', msg: 'Bitte gib deinen Namen ein.' },
+                { type: 'email', id: 'email', msg: 'Bitte gib eine gültige E-Mail-Adresse ein.' },
+                { type: 'input', id: 'industry', msg: 'Bitte gib deine Branche an.' },
+                { type: 'textarea', id: 'business_desc', msg: 'Bitte beschreib kurz dein Unternehmen.' }
+            ],
+            2: [
+                { type: 'radio', name: 'has_website', msg: 'Bitte wähle aus, ob du bereits eine Website hast.' },
+                { type: 'radio', name: 'has_branding', msg: 'Bitte wähle aus, ob du bereits ein Branding hast.' },
+                { type: 'radio', name: 'has_domain', msg: 'Bitte wähle aus, ob du bereits eine Domain hast.' }
+            ],
+            3: [
+                { type: 'checkbox', prefix: 'goal_', msg: 'Bitte wähle mindestens ein Ziel aus.' },
+                { type: 'textarea', id: 'target_audience', msg: 'Bitte beschreib deine Zielgruppe.' }
+            ],
+            4: [
+                { type: 'checkbox', prefix: 'page_', msg: 'Bitte wähle mindestens eine Seite aus.' }
+            ],
+            5: [
+                { type: 'radio', name: 'has_content', msg: 'Bitte wähle aus, ob du bereits Texte hast.' },
+                { type: 'radio', name: 'timeline', msg: 'Bitte wähle einen Zeitrahmen aus.' },
+                { type: 'select', id: 'budget', msg: 'Bitte wähle einen Budgetrahmen aus.' }
+            ]
+        };
+
+        function clearErrors(step) {
+            const stepEl = document.querySelector(`[data-step="${step}"]`);
+            if (!stepEl) return;
+            stepEl.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+            stepEl.querySelectorAll('.form-error').forEach(el => el.remove());
+        }
+
+        function showError(el, msg) {
+            el.classList.add('error');
+            const err = document.createElement('div');
+            err.className = 'form-error visible';
+            err.textContent = msg;
+            el.parentElement.appendChild(err);
+        }
+
+        function validateStep(step) {
+            clearErrors(step);
+            const rules = stepValidation[step];
+            if (!rules) return true;
+            let valid = true;
+            for (const rule of rules) {
+                if (rule.type === 'input' || rule.type === 'textarea') {
+                    const el = document.getElementById(rule.id);
+                    if (!el || !el.value.trim()) { showError(el, rule.msg); valid = false; }
+                } else if (rule.type === 'email') {
+                    const el = document.getElementById(rule.id);
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!el || !el.value.trim() || !emailRegex.test(el.value.trim())) { showError(el, rule.msg); valid = false; }
+                } else if (rule.type === 'radio') {
+                    const checked = document.querySelector(`input[name="${rule.name}"]:checked`);
+                    if (!checked) {
+                        const grid = document.querySelector(`input[name="${rule.name}"]`).closest('.form-group').querySelector('.option-grid');
+                        if (grid) showError(grid, rule.msg);
+                        valid = false;
+                    }
+                } else if (rule.type === 'checkbox') {
+                    const checked = document.querySelectorAll(`input[id^="${rule.prefix}"]:checked`);
+                    if (checked.length === 0) {
+                        const grid = document.querySelector(`input[id^="${rule.prefix}"]`).closest('.form-group').querySelector('.option-grid');
+                        if (grid) showError(grid, rule.msg);
+                        valid = false;
+                    }
+                } else if (rule.type === 'select') {
+                    const el = document.getElementById(rule.id);
+                    if (!el || !el.value) { showError(el, rule.msg); valid = false; }
+                }
+            }
+            if (!valid) {
+                const firstErr = document.querySelector(`[data-step="${step}"] .error`);
+                if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return valid;
+        }
+
         function nextStep() {
+            formTouched = true;
             if (currentStep < totalSteps) {
+                if (!validateStep(currentStep)) return;
                 currentStep++;
                 if (currentStep === totalSteps) buildSummary();
                 showStep(currentStep);
@@ -758,6 +852,32 @@
         }
 
         function prevStep() { if (currentStep > 1) { currentStep--; showStep(currentStep); } }
+
+        document.addEventListener('input', function(e) {
+            const el = e.target;
+            if (el.classList.contains('error')) {
+                el.classList.remove('error');
+                const err = el.parentElement.querySelector('.form-error');
+                if (err) err.remove();
+            }
+        });
+
+        document.addEventListener('change', function(e) {
+            const el = e.target;
+            if (el.type === 'radio' || el.type === 'checkbox') {
+                const grid = el.closest('.form-group').querySelector('.option-grid.error');
+                if (grid) {
+                    grid.classList.remove('error');
+                    const err = grid.parentElement.querySelector('.form-error');
+                    if (err) err.remove();
+                }
+            }
+            if (el.tagName === 'SELECT' && el.classList.contains('error')) {
+                el.classList.remove('error');
+                const err = el.parentElement.querySelector('.form-error');
+                if (err) err.remove();
+            }
+        });
 
         function toggleConditional(id, show) {
             const el = document.getElementById(id);
@@ -844,6 +964,7 @@
         }
 
         function submitForm() {
+            formTouched = false;
             const data = collectAllData();
             const WEBHOOK_URL = 'https://workflow.kantorlab.de/webhook/c48631c4-e3f0-4196-a9fb-da399560ccca';
             const submitBtn = document.querySelector('.step.active .btn-primary');
