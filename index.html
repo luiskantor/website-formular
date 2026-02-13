@@ -332,16 +332,17 @@
         .summary-value.empty { color: var(--text-muted); font-style: italic; }
 
         /* Success */
-        .success-view { display: none; text-align: center; padding: 60px 32px; animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
-        .success-view.active { display: block; }
+        .success-view { display: none; text-align: center; padding: 60px 32px; animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); min-height: calc(100vh - 200px); flex-direction: column; align-items: center; justify-content: center; }
+        .success-view.active { display: flex; }
         .success-icon {
             width: 64px; height: 64px; border-radius: 50%;
             background: var(--success-bg); display: flex;
             align-items: center; justify-content: center; margin: 0 auto 20px;
         }
         .success-icon svg { width: 28px; height: 28px; color: var(--success); }
-        .success-view h2 { font-family: 'Geist Sans', sans-serif; font-size: 24px; font-weight: 700; margin-bottom: 8px; }
-        .success-view p { color: var(--text-secondary); font-size: 14px; margin-bottom: 28px; }
+        .success-view h2 { font-family: 'Geist Mono', monospace; font-size: 24px; font-weight: 400; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .success-view p { color: var(--text-secondary); font-size: 14px; margin-bottom: 8px; }
+        .success-view p:last-of-type { margin-bottom: 28px; }
 
         .conditional { display: none; margin-top: 12px; padding-left: 28px; }
         .conditional.visible { display: block; animation: fadeIn 0.3s ease-out; }
@@ -692,8 +693,9 @@
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                     </div>
                     <h2>Vielen Dank!</h2>
-                    <p>Die Angaben wurden erfolgreich übermittelt. Innerhalb von 2 Werktagen folgt ein individuelles Angebot.</p>
-                    <button class="btn btn-primary" onclick="resetForm()">Neuen Fragebogen ausfüllen</button>
+                    <p>Die Angaben wurden erfolgreich übermittelt.</p>
+                    <p>Innerhalb von 2 Werktagen folgt ein individuelles Angebot.</p>
+                    <a class="btn btn-primary" href="https://www.kantorlab.de">Zur Homepage</a>
                 </div>
             </div>
         </div>
