@@ -826,8 +826,8 @@
             submitBtn.innerHTML = 'Wird gesendet …';
             submitBtn.disabled = true;
             try {
-                const response = await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
-                if (!response.ok) throw new Error('Serverfehler');
+                const response = await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(data) });
+                if (!response.ok) throw new Error('Server antwortete mit Status ' + response.status);
                 document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
                 document.querySelector('.progress-container').style.display = 'none';
                 document.getElementById('successView').classList.add('active');
@@ -835,7 +835,7 @@
                 console.error('Fehler beim Senden:', error);
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
-                alert('Leider konnte der Fragebogen nicht gesendet werden. Bitte erneut versuchen oder direkt Kontakt aufnehmen.');
+                alert('Leider konnte der Fragebogen nicht gesendet werden. Bitte erneut versuchen oder direkt Kontakt aufnehmen.\n\nFehler: ' + error.message);
             }
         }
 
