@@ -942,23 +942,40 @@
         }
 
         function buildSummaryHtml(data) {
+            var dateStr = '';
+            try {
+                var d = new Date(data.submitted_at);
+                dateStr = ('0' + d.getDate()).slice(-2) + '.' + ('0' + (d.getMonth() + 1)).slice(-2) + '.' + d.getFullYear();
+            } catch(e) { dateStr = data.submitted_at; }
+
             function row(label, value) {
-                const isEmpty = !value || value === '' || (Array.isArray(value) && value.length === 0);
-                const display = Array.isArray(value) ? value.join(', ') : value;
-                return '<tr><td style="padding:6px 20px 6px 0;font-size:12px;color:#6B6860;white-space:nowrap;vertical-align:top;">' + label + '</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;word-break:break-word;">' + (isEmpty ? '<span style="color:#9B978F;font-style:italic;">–</span>' : display) + '</td></tr>';
+                var isEmpty = !value || value === '' || (Array.isArray(value) && value.length === 0);
+                var display = Array.isArray(value) ? value.join(', ') : value;
+                return '<div style="display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;gap:20px;">' +
+                    '<span style="font-size:12px;color:#9B978F;flex-shrink:0;min-width:120px;">' + label + '</span>' +
+                    '<span style="font-size:13px;color:#1A1A1A;text-align:right;word-break:break-word;">' + (isEmpty ? '<span style="color:#9B978F;font-style:italic;">–</span>' : display) + '</span>' +
+                    '</div>';
             }
             function section(title, rows) {
-                return '<table style="width:100%;border-collapse:collapse;margin-bottom:20px;border-top:1px solid #E8E6E1;padding-top:12px;"><tr><td colspan="2" style="padding:12px 0 8px;font-size:14px;font-weight:600;color:#1A1A1A;">' + title + '</td></tr>' + rows + '</table>';
+                return '<div style="margin-bottom:20px;border-top:1px solid #E8E6E1;padding-top:16px;">' +
+                    '<div style="font-size:14px;font-weight:600;color:#1A1A1A;margin-bottom:10px;">' + title + '</div>' +
+                    rows + '</div>';
             }
-            var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body style="font-family:Helvetica,Arial,sans-serif;max-width:600px;margin:0 auto;padding:40px 32px;color:#1A1A1A;">';
-            html += '<h1 style="font-size:22px;font-weight:600;margin-bottom:4px;">Website-Fragebogen</h1>';
-            html += '<p style="font-size:13px;color:#6B6860;margin-bottom:28px;">' + (data.name || '') + (data.company ? ' · ' + data.company : '') + ' · ' + data.submitted_at + '</p>';
+            var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></head>';
+            html += '<body style="font-family:\'DM Sans\',Helvetica,Arial,sans-serif;max-width:600px;margin:0 auto;padding:40px 32px 20px;color:#1A1A1A;position:relative;min-height:100vh;">';
+            html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px;">';
+            html += '<h1 style="font-size:22px;font-weight:600;margin:0;">Zusammenfassung · Kontaktformular</h1>';
+            html += '<span style="font-size:13px;color:#9B978F;white-space:nowrap;margin-top:6px;">' + dateStr + '</span>';
+            html += '</div>';
             html += section('Kontakt & Unternehmen', row('Name', data.name) + row('Firma', data.company) + row('E-Mail', data.email) + row('Telefon', data.phone) + row('Branche', data.industry) + row('Beschreibung', data.business_desc));
             html += section('Aktuelle Situation', row('Website vorhanden', data.has_website) + (data.current_url ? row('Aktuelle URL', data.current_url) : '') + (data.website_problems ? row('Probleme', data.website_problems) : '') + row('Branding vorhanden', data.has_branding) + row('Domain vorhanden', data.has_domain));
             html += section('Ziele & Zielgruppe', row('Ziele', data.goals) + row('Zielgruppe', data.target_audience) + row('Referenz-Websites', data.competitors));
             html += section('Umfang', row('Gewünschte Seiten', data.pages) + (data.pages_other ? row('Weitere Seiten', data.pages_other) : '') + row('Funktionen', data.features));
             html += section('Inhalte & Rahmenbedingungen', row('Texte vorhanden', data.has_content) + row('Fotos vorhanden', data.has_photos) + row('Zeitrahmen', data.timeline) + row('Budget', data.budget));
             if (data.additional_notes) html += section('Zusätzliche Anmerkungen', row('Notizen', data.additional_notes));
+            html += '<div style="border-top:1px solid #E8E6E1;padding-top:12px;margin-top:32px;text-align:center;">';
+            html += '<span style="font-size:11px;color:#9B978F;">Formular eingereicht über apply.kantorlab.de</span>';
+            html += '</div>';
             html += '</body></html>';
             return html;
         }
