@@ -818,28 +818,45 @@
             };
         }
 
-        async function submitForm() {
+        function submitForm() {
             const data = collectAllData();
             const WEBHOOK_URL = 'https://workflow.kantorlab.de/webhook/c48631c4-e3f0-4196-a9fb-da399560ccca';
             const submitBtn = document.querySelector('.step.active .btn-primary');
-            const originalText = submitBtn.innerHTML;
             submitBtn.innerHTML = 'Wird gesendet …';
             submitBtn.disabled = true;
-            try {
-                const params = new URLSearchParams();
-                for (const [key, value] of Object.entries(data)) {
-                    params.append(key, Array.isArray(value) ? value.join(', ') : (value || ''));
-                }
-                await fetch(WEBHOOK_URL, { method: 'POST', mode: 'no-cors', body: params });
+
+            let iframe = document.getElementById('submit-iframe');
+            if (!iframe) {
+                iframe = document.createElement('iframe');
+                iframe.id = 'submit-iframe';
+                iframe.name = 'submit-iframe';
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+            }
+
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = WEBHOOK_URL;
+            form.target = 'submit-iframe';
+            form.style.display = 'none';
+
+            for (const [key, value] of Object.entries(data)) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = Array.isArray(value) ? value.join(', ') : (value || '');
+                form.appendChild(input);
+            }
+
+            document.body.appendChild(form);
+            form.submit();
+            form.remove();
+
+            setTimeout(() => {
                 document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
                 document.querySelector('.progress-container').style.display = 'none';
                 document.getElementById('successView').classList.add('active');
-            } catch (error) {
-                console.error('Fehler beim Senden:', error);
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                alert('Leider konnte der Fragebogen nicht gesendet werden. Bitte erneut versuchen oder direkt Kontakt aufnehmen.\n\nFehler: ' + error.message);
-            }
+            }, 1500);
         }
 
         function resetForm() {
