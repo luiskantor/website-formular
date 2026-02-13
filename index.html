@@ -365,7 +365,7 @@
             .header p { padding-bottom: 16px; }
             .panel-right { width: 100%; height: auto; overflow: visible; }
             .panel-right-content { padding: 32px 24px 48px; }
-            .progress-container { padding: 16px 24px 16px; }
+            .progress-container { padding: 16px 24px 22px; }
             .footer-wrapper { position: static; width: 100%; padding: 24px 24px; border-top: 1px solid var(--divider); }
             .header-logo { width: 120px; height: auto; margin-bottom: 20px; }
             .form-row, .option-grid { grid-template-columns: 1fr; }
@@ -444,7 +444,7 @@
             <div class="progress-container">
                 <div class="progress-info">
                     <span class="progress-step">Schritt <span id="currentStep">1</span> von <span id="totalSteps">6</span></span>
-                    <span class="progress-label" id="progressLabel">Über dich</span>
+                    <span class="progress-label" id="progressLabel">Allgemeine Informationen</span>
                 </div>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill" style="width: 16.66%"></div>
@@ -455,7 +455,7 @@
                 <!-- STEP 1 -->
                 <div class="step active" data-step="1">
                     <div class="step-header">
-                        <div class="step-header-label"><span>01</span><span>Über dich & dein Unternehmen</span></div>
+                        <div class="step-header-label"><span>01</span><span>Allgemeine Informationen</span></div>
                         <div class="step-description">Grundlegende Informationen zu dir und dem Unternehmen.</div>
                     </div>
                     <div class="form-row">
@@ -739,7 +739,7 @@
 
         let currentStep = 1;
         const totalSteps = 6;
-        const stepLabels = ['Über dich', 'Aktuelle Situation', 'Ziele & Zielgruppe', 'Umfang & Inhalte', 'Inhalte & Budget', 'Zusammenfassung'];
+        const stepLabels = ['Allgemeine Informationen', 'Aktuelle Situation', 'Ziele & Zielgruppe', 'Umfang & Inhalte', 'Inhalte & Budget', 'Zusammenfassung'];
 
         function updateProgress() {
             document.getElementById('currentStep').textContent = currentStep;
@@ -931,7 +931,7 @@
         function buildSummary() {
             const goals = getChecked('goal_'), pages = getChecked('page_'), features = getChecked('feat_');
             let html = '';
-            html += `<div class="summary-section"><div class="summary-section-title">Kontakt & Unternehmen</div>${summaryRow('Name', getVal('name'))}${summaryRow('Firma', getVal('company'))}${summaryRow('E-Mail', getVal('email'))}${summaryRow('Telefon', getVal('phone'))}${summaryRow('Branche', getVal('industry'))}${summaryRow('Beschreibung', getVal('business_desc'))}</div>`;
+            html += `<div class="summary-section"><div class="summary-section-title">Allgemeine Informationen</div>${summaryRow('Name', getVal('name'))}${summaryRow('Firma', getVal('company'))}${summaryRow('E-Mail', getVal('email'))}${summaryRow('Telefon', getVal('phone'))}${summaryRow('Branche', getVal('industry'))}${summaryRow('Beschreibung', getVal('business_desc'))}</div>`;
             html += `<div class="summary-section"><div class="summary-section-title">Aktuelle Situation</div>${summaryRow('Website vorhanden', getRadio('has_website'))}${getVal('current_url') ? summaryRow('Aktuelle URL', getVal('current_url')) : ''}${getVal('website_problems') ? summaryRow('Probleme', getVal('website_problems')) : ''}${summaryRow('Branding vorhanden', getRadio('has_branding'))}${summaryRow('Domain vorhanden', getRadio('has_domain'))}</div>`;
             html += `<div class="summary-section"><div class="summary-section-title">Ziele & Zielgruppe</div>${summaryRow('Ziele', goals)}${summaryRow('Zielgruppe', getVal('target_audience'))}${summaryRow('Referenz-Websites', getVal('competitors'))}</div>`;
             html += `<div class="summary-section"><div class="summary-section-title">Umfang</div>${summaryRow('Gewünschte Seiten', pages)}${summaryRow('Weitere Seiten', getVal('pages_other_detail'))}${summaryRow('Funktionen', features)}</div>`;
@@ -980,7 +980,7 @@
             html += '<h1 style="font-size:22px;font-weight:600;margin:0;">Zusammenfassung · Fragebogen</h1>';
             html += '<span style="font-size:13px;color:#9B978F;white-space:nowrap;margin-top:6px;">' + dateStr + '</span>';
             html += '</div>';
-            html += section('Kontakt & Unternehmen', row('Name', data.name) + row('Firma', data.company) + row('E-Mail', data.email) + row('Telefon', data.phone) + row('Branche', data.industry) + row('Beschreibung', data.business_desc));
+            html += section('Allgemeine Informationen', row('Name', data.name) + row('Firma', data.company) + row('E-Mail', data.email) + row('Telefon', data.phone) + row('Branche', data.industry) + row('Beschreibung', data.business_desc));
             html += section('Aktuelle Situation', row('Website vorhanden', data.has_website) + (data.current_url ? row('Aktuelle URL', data.current_url) : '') + (data.website_problems ? row('Probleme', data.website_problems) : '') + row('Branding vorhanden', data.has_branding) + row('Domain vorhanden', data.has_domain));
             html += section('Ziele & Zielgruppe', row('Ziele', data.goals) + row('Zielgruppe', data.target_audience) + row('Referenz-Websites', data.competitors));
             html += section('Umfang', row('Gewünschte Seiten', data.pages) + (data.pages_other ? row('Weitere Seiten', data.pages_other) : '') + row('Funktionen', data.features));
