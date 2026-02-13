@@ -826,7 +826,11 @@
             submitBtn.innerHTML = 'Wird gesendet …';
             submitBtn.disabled = true;
             try {
-                await fetch(WEBHOOK_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(data) });
+                const params = new URLSearchParams();
+                for (const [key, value] of Object.entries(data)) {
+                    params.append(key, Array.isArray(value) ? value.join(', ') : (value || ''));
+                }
+                await fetch(WEBHOOK_URL, { method: 'POST', mode: 'no-cors', body: params });
                 document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
                 document.querySelector('.progress-container').style.display = 'none';
                 document.getElementById('successView').classList.add('active');
