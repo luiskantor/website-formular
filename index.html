@@ -202,15 +202,14 @@
             align-items: center;
             gap: 16px;
             font-family: 'GeistMono', monospace;
-            font-size: 11px;
+            font-size: 18px;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0;
-            color: var(--text-muted);
-            margin-bottom: 14px;
+            color: var(--text);
+            margin-bottom: 4px;
         }
 
-        .step-title { font-family: 'Geist Sans', sans-serif; font-size: 20px; font-weight: 600; margin-bottom: 4px; }
         .step-description { font-size: 14px; color: var(--text-secondary); }
 
         /* ===== FORM ===== */
@@ -385,7 +384,6 @@
                 <div class="step active" data-step="1">
                     <div class="step-header">
                         <div class="step-header-label"><span>01</span><span>Über dich & dein Unternehmen</span></div>
-                        <div class="step-title">Über dich & dein Unternehmen</div>
                         <div class="step-description">Grundlegende Informationen zum Ansprechpartner und Unternehmen.</div>
                     </div>
                     <div class="form-row">
@@ -428,7 +426,6 @@
                 <div class="step" data-step="2">
                     <div class="step-header">
                         <div class="step-header-label"><span>02</span><span>Deine aktuelle Situation</span></div>
-                        <div class="step-title">Deine aktuelle Situation</div>
                         <div class="step-description">Wo stehst du gerade mit deiner Online-Präsenz?</div>
                     </div>
                     <div class="form-group">
@@ -482,7 +479,6 @@
                 <div class="step" data-step="3">
                     <div class="step-header">
                         <div class="step-header-label"><span>03</span><span>Ziele & Zielgruppe</span></div>
-                        <div class="step-title">Ziele & Zielgruppe</div>
                         <div class="step-description">Was soll die Website für dich erreichen?</div>
                     </div>
                     <div class="form-group">
@@ -517,7 +513,6 @@
                 <div class="step" data-step="4">
                     <div class="step-header">
                         <div class="step-header-label"><span>04</span><span>Umfang & Inhalte</span></div>
-                        <div class="step-title">Umfang & Inhalte</div>
                         <div class="step-description">Was soll alles auf die Website?</div>
                     </div>
                     <div class="form-group">
@@ -565,7 +560,6 @@
                 <div class="step" data-step="5">
                     <div class="step-header">
                         <div class="step-header-label"><span>05</span><span>Inhalte, Zeitplan & Budget</span></div>
-                        <div class="step-title">Inhalte, Zeitplan & Budget</div>
                         <div class="step-description">Für eine realistische Planung und Angebotserstellung.</div>
                     </div>
                     <div class="form-group">
@@ -600,12 +594,11 @@
                         <div class="form-hint">Keine Sorge – es geht nur um eine grobe Einschätzung, damit das Angebot entsprechend gestaltet werden kann.</div>
                         <select class="form-select" id="budget">
                             <option value="" disabled selected>Bitte wählen …</option>
-                            <option value="Unter 1.000 €">Unter 1.000 €</option>
-                            <option value="1.000 – 2.500 €">1.000 – 2.500 €</option>
-                            <option value="2.500 – 5.000 €">2.500 – 5.000 €</option>
-                            <option value="5.000 – 10.000 €">5.000 – 10.000 €</option>
-                            <option value="Über 10.000 €">Über 10.000 €</option>
-                            <option value="Noch keine Vorstellung">Noch keine Vorstellung</option>
+                            <option value="4.000 – 7.500 €">4.000 – 7.500 €</option>
+                            <option value="7.500 – 12.000 €">7.500 – 12.000 €</option>
+                            <option value="12.000 €+">12.000 €+</option>
+                            <option value="Unsicher, aber investitionsbereit">Ich bin mir unsicher, bin aber grundsätzlich bereit, im passenden Rahmen zu investieren</option>
+                            <option value="Individueller Projektumfang">Mein Vorhaben entspricht nicht dem typischen Projektumfang und sollte individuell eingeordnet werden</option>
                         </select>
                     </div>
                     <div class="step-nav">
@@ -618,7 +611,6 @@
                 <div class="step" data-step="6">
                     <div class="step-header">
                         <div class="step-header-label"><span>06</span><span>Zusammenfassung</span></div>
-                        <div class="step-title">Zusammenfassung</div>
                         <div class="step-description">Bitte überprüfe deine Angaben. Du kannst jederzeit zurückgehen und Änderungen vornehmen.</div>
                     </div>
                     <div id="summaryContent"></div>
