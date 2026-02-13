@@ -454,7 +454,7 @@
                     </div>
                     <div class="form-divider"></div>
                     <div class="form-group">
-                        <label class="form-label">Hast du bereits ein Logo und ein einheitliches Design (Farben, Schriften)?</label>
+                        <label class="form-label">Hast du bereits ein Logo und ein einheitliches Design (Farben, Schriften)? *</label>
                         <div class="option-grid single-col">
                             <div class="option-item"><input type="radio" name="has_branding" id="branding_yes" value="ja_komplett"><label for="branding_yes"><span class="option-check"></span><span class="option-label-text"><strong>Ja, alles vorhanden</strong><span>Logo, Farben & Schriften stehen fest</span></span></label></div>
                             <div class="option-item"><input type="radio" name="has_branding" id="branding_partial" value="teilweise"><label for="branding_partial"><span class="option-check"></span><span class="option-label-text"><strong>Teilweise</strong><span>Ich habe ein Logo, aber sonst wenig definiert</span></span></label></div>
@@ -462,7 +462,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Hast du bereits eine eigene Domain (www.dein-name.de)?</label>
+                        <label class="form-label">Hast du bereits eine eigene Domain (www.dein-name.de)? *</label>
                         <div class="option-grid">
                             <div class="option-item"><input type="radio" name="has_domain" id="domain_yes" value="ja"><label for="domain_yes"><span class="option-check"></span><span>Ja, habe ich</span></label></div>
                             <div class="option-item"><input type="radio" name="has_domain" id="domain_no" value="nein"><label for="domain_no"><span class="option-check"></span><span>Nein, brauche ich noch</span></label></div>
@@ -586,11 +586,12 @@
                             <div class="option-item"><input type="radio" name="timeline" id="timeline_asap" value="So schnell wie möglich"><label for="timeline_asap"><span class="option-check"></span><span>So schnell wie möglich</span></label></div>
                             <div class="option-item"><input type="radio" name="timeline" id="timeline_month" value="In 1–2 Monaten"><label for="timeline_month"><span class="option-check"></span><span>In 1–2 Monaten</span></label></div>
                             <div class="option-item"><input type="radio" name="timeline" id="timeline_quarter" value="In 2–3 Monaten"><label for="timeline_quarter"><span class="option-check"></span><span>In 2–3 Monaten</span></label></div>
+                            <div class="option-item"><input type="radio" name="timeline" id="timeline_none" value="Ohne Zeitangabe"><label for="timeline_none"><span class="option-check"></span><span>Ohne Zeitangabe</span></label></div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Hast du ein ungefähres Budget im Kopf?</label>
-                        <div class="form-hint">Keine Sorge – es geht nur um eine grobe Einschätzung, damit das Angebot entsprechend gestaltet werden kann.</div>
+                        <label class="form-label">In welchem Budgetrahmen bewegst du dich? *</label>
+                        <div class="form-hint">Eine grobe Einschätzung reicht – damit das Angebot entsprechend gestaltet werden kann.</div>
                         <select class="form-select" id="budget">
                             <option value="" disabled selected>Bitte wählen …</option>
                             <option value="4.000 – 7.500 €">4.000 – 7.500 €</option>
@@ -678,16 +679,22 @@
         function getRadio(name) {
             const checked = document.querySelector(`input[name="${name}"]:checked`);
             if (!checked) return '';
-            const label = checked.closest('.option-item').querySelector('.option-label-text strong, .option-item label span:not(.option-check)');
-            if (label) return label.textContent.trim();
+            const item = checked.closest('.option-item');
+            const strong = item.querySelector('.option-label-text strong');
+            if (strong) return strong.textContent.trim();
+            const span = item.querySelector('label span:not(.option-check):not(.option-label-text)');
+            if (span) return span.textContent.trim();
             return checked.value;
         }
 
         function getChecked(prefix) {
             const items = [];
             document.querySelectorAll(`input[type="checkbox"][id^="${prefix}"]:checked`).forEach(cb => {
-                const label = cb.closest('.option-item').querySelector('.option-label-text strong, .option-item label span:not(.option-check)');
-                if (label) items.push(label.textContent.trim());
+                const item = cb.closest('.option-item');
+                const strong = item.querySelector('.option-label-text strong');
+                if (strong) { items.push(strong.textContent.trim()); return; }
+                const span = item.querySelector('label span:not(.option-check):not(.option-label-text)');
+                if (span) items.push(span.textContent.trim());
                 else items.push(cb.value);
             });
             return items;
